@@ -7,7 +7,7 @@
         ref="formadd"
       >
         <el-form-item
-          label="婚礼"
+          label="珠宝"
           prop="title"
           :inline-message="true"
         >

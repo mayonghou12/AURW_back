@@ -1,4 +1,4 @@
-//婚纱
+//珠宝
 <template>
     <div>
       <el-button @click="showModal" type="primary">添加图片</el-button>
@@ -6,7 +6,7 @@
         :data="tableData"
       >
       <el-table-column
-        label="婚纱照"
+        label="珠宝照"
       >
         <template slot-scope="scope">
             <!-- <span>{{scope.row.cover}}</span> -->
