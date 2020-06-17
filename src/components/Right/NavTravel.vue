@@ -6,7 +6,7 @@
         :data="tableData"
       >
       <el-table-column
-        label="旅拍"
+        label="旅拍图"
       >
         <template slot-scope="scope">
             <!-- <span>{{scope.row.cover}}</span> -->
@@ -15,7 +15,7 @@
       </el-table-column>
       <el-table-column
         label="上传时间"
-        prop="createTime"
+        prop="tour_createTime"
       >
       </el-table-column>
       <!-- <el-table-column
@@ -76,14 +76,14 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.state.banner.bannerList
+      return this.$store.state.tour.tourList
     },
     total () {
-      return this.$store.state.banner.total
+      return this.$store.state.tour.total
     }
   },
   created () {
-    this.getBanner()
+    this.getTour()
   },
   components: {
     AddTravel
@@ -98,14 +98,14 @@ export default {
     changePage (current) {
       this.current = current
       // 通过当前页码的改变 改变当前页的数据
-      this.getBanner()
+      this.getTour()
     },
     changePageSize (size) {
       this.pageSize = size
-      this.getBanner()
+      this.getTour()
     },
-    getBanner () {
-      this.$store.dispatch('getBannerList', {
+    getTour () {
+      this.$store.dispatch('getTourList', {
         current: this.current,
         pageSize: this.pageSize
       })

@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { setBanner } from 'public/axiosRequest'
+import { setTour } from 'public/axiosRequest'
 export default {
   data () {
     const sheckImg = (rule, value, callback) => {
@@ -95,7 +95,7 @@ export default {
           message: '请输入图片标题！',
           trigger: 'blur'
         }, {
-          min: 5,
+          min: 3,
           max: 20,
           message: '请输入图片标题 5导到20个字符之间',
           trigger: 'blur'
@@ -136,11 +136,11 @@ export default {
           imgId: response.data.id
         }
         // 调用封装的axios方法
-        setBanner(data, () => {
+        setTour(data, () => {
           this.loading = false
           this.$emit('closeModal')
           // 刷新列表数据
-          this.$store.dispatch('getBannerList')
+          this.$store.dispatch('getTourList')
         }, () => {
           this.loading = false
         })
