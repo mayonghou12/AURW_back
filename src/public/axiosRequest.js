@@ -4,9 +4,9 @@
 
 import { axiosRequest } from './axios'
 
-const setBanner = (data, success, fail) => {
+const setTour = (data, success, fail) => {
   axiosRequest({
-    url: 'setBanner',
+    url: 'setTour',
     data: data
   }).then((res) => {
     success()
@@ -18,9 +18,34 @@ const setBanner = (data, success, fail) => {
   })
 }
 
-const getBanner = (options) => {
+const getTour = (options) => {
   axiosRequest({
-    url: 'getBanner',
+    url: 'getTour',
+    data: options.data
+  }).then((res) => {
+    console.log(res)
+    options.success(res)
+  }).catch(() => {
+  })
+}
+
+const setDress = (data, success, fail) => {
+  axiosRequest({
+    url: 'setDress',
+    data: data
+  }).then((res) => {
+    success()
+    // this.loading = false
+    // this.$emit('closeModal')
+  }).catch(() => {
+    // this.loading = false
+    fail()
+  })
+}
+
+const getDress = (options) => {
+  axiosRequest({
+    url: 'getDress',
     data: options.data
   }).then((res) => {
     console.log(res)
@@ -30,6 +55,8 @@ const getBanner = (options) => {
 }
 
 export {
-  setBanner,
-  getBanner
+  setTour,
+  getTour,
+  setDress,
+  getDress
 }
