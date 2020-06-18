@@ -34,12 +34,6 @@
           </el-upload>
         </el-form-item>
         <el-form-item
-          label="添加详解"
-          prop="text"
-        >
-        <el-input v-model="formdata.text"></el-input>
-        </el-form-item>
-        <el-form-item
           label="请选择状态"
           prop="status"
         >
@@ -90,7 +84,6 @@ export default {
       formdata: {
         title: '',
         status: '',
-        text: '',
         createTime: '',
         imageUrl: '',
         file: {}
@@ -106,13 +99,6 @@ export default {
           max: 20,
           message: '请输入图片标题 5导到20个字符之间',
           trigger: 'blur'
-        }],
-        text: [{
-          required: true,
-          message: '请输入详解',
-          trigger: 'blur'
-        }, {
-
         }],
         status: [{
           required: true,

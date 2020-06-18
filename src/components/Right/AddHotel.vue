@@ -15,7 +15,7 @@
         <!-- </el-form-item> -->
 
         <el-form-item
-          label="请上传酒店LOGO"
+          label="请上传酒店LOGO2"
           prop="imageUrl"
         >
           <el-upload

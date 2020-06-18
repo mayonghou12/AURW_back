@@ -27,7 +27,6 @@
         >
         <template slot-scope="scope">
             <el-link type="primary">{{scope.row.status == 0 ? '下线' : '上线'}}</el-link>
-            <!-- <a>{{scope.row.status == 1 ? '下线' : '上线'}}</a> -->
         </template>
         </el-table-column>
         <el-table-column
@@ -35,9 +34,7 @@
         >
         <template>
           <el-link type="primary">编辑</el-link>
-          <el-link type="danger">删除</el-link>
-          <el-link>查看</el-link>
-          <!-- <a>{{scope.row.status == 1 ? '下线' : '上线'}}</a> -->
+          <el-link style="margin-left:5px" type="danger">删除</el-link>
         </template>
         </el-table-column>
       </el-table>
@@ -65,6 +62,7 @@
 
 <script>
 import AddWedding from './AddWedding'
+// import AddWedingrad from './AddWedingrad'
 export default {
   data () {
     return {
@@ -86,6 +84,7 @@ export default {
   },
   components: {
     AddWedding
+    // AddWedingrad
   },
   methods: {
     showModal () {
