@@ -9,20 +9,15 @@
         label="婚纱照"
       >
         <template slot-scope="scope">
-            <span>{{scope.row.cover}}</span>
+            <!-- <span>{{scope.row.cover}}</span> -->
             <img width="80" :src="'http://localhost:3000/' + scope.row.img_url" />
         </template>
       </el-table-column>
       <el-table-column
         label="上传时间"
-        prop="createTime"
+        prop="bv_createTime"
       >
       </el-table-column>
-      <el-table-column
-        label="更新时间"
-        prop="updateTime"
-       >
-       </el-table-column>`
         <el-table-column
             label="状态"
         >
@@ -75,14 +70,14 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.state.banner.bannerList
+      return this.$store.state.Dress.DressList
     },
     total () {
-      return this.$store.state.banner.total
+      return this.$store.state.Dress.total
     }
   },
   created () {
-    this.getBanner()
+    this.getDress()
   },
   components: {
     AddDress
@@ -97,14 +92,14 @@ export default {
     changePage (current) {
       this.current = current
       // 通过当前页码的改变 改变当前页的数据
-      this.getBanner()
+      this.getDress()
     },
     changePageSize (size) {
       this.pageSize = size
-      this.getBanner()
+      this.getDress()
     },
-    getBanner () {
-      this.$store.dispatch('getBannerList', {
+    getDress () {
+      this.$store.dispatch('getDressList', {
         current: this.current,
         pageSize: this.pageSize
       })

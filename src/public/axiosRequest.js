@@ -54,9 +54,63 @@ const getDress = (options) => {
   })
 }
 
+const setWedding = (data, success, fail) => {
+  axiosRequest({
+    url: 'setWedding',
+    data: data
+  }).then((res) => {
+    success()
+    // this.loading = false
+    // this.$emit('closeModal')
+  }).catch(() => {
+    // this.loading = false
+    fail()
+  })
+}
+
+const getWedding = (options) => {
+  axiosRequest({
+    url: 'getWedding',
+    data: options.data
+  }).then((res) => {
+    console.log(res)
+    options.success(res)
+  }).catch(() => {
+  })
+}
+
+const setJewel = (data, success, fail) => {
+  axiosRequest({
+    url: 'setJewel',
+    data: data
+  }).then((res) => {
+    success()
+    // this.loading = false
+    // this.$emit('closeModal')
+  }).catch(() => {
+    // this.loading = false
+    fail()
+  })
+}
+
+const getJewel = (options) => {
+  axiosRequest({
+    url: 'getJewel',
+    data: options.data
+  }).then((res) => {
+    console.log(res)
+    options.success(res)
+  }).catch(() => {
+  })
+}
+
 export {
   setTour,
   getTour,
   setDress,
-  getDress
+  getDress,
+  setWedding,
+  getWedding,
+  setJewel,
+  getJewel
 }

@@ -7,7 +7,7 @@
         ref="formadd"
       >
         <el-form-item
-          label="婚礼"
+          label="婚纱"
           prop="title"
           :inline-message="true"
         >
@@ -27,7 +27,6 @@
             :auto-upload="false"
             :on-success="imgUploadSuccess"
             ref="upload"
-            limit="5"
           >
             <img width="100%" height="100%" v-if="formdata.imageUrl" :src="formdata.imageUrl" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -70,7 +69,7 @@
 </template>
 
 <script>
-import { setBanner } from 'public/axiosRequest'
+import { setDress } from 'public/axiosRequest'
 export default {
   data () {
     const sheckImg = (rule, value, callback) => {
@@ -137,11 +136,11 @@ export default {
           imgId: response.data.id
         }
         // 调用封装的axios方法
-        setBanner(data, () => {
+        setDress(data, () => {
           this.loading = false
           this.$emit('closeModal')
           // 刷新列表数据
-          this.$store.dispatch('getBannerList')
+          this.$store.dispatch('getDressList')
         }, () => {
           this.loading = false
         })

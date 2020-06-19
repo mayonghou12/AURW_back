@@ -8,20 +8,20 @@
         label="婚礼"
       >
         <template slot-scope="scope">
-            <span>{{scope.row.cover}}</span>
+            <!-- <span>{{scope.row.cover}}</span> -->
             <img width="80" :src="'http://localhost:3000/' + scope.row.img_url" />
         </template>
       </el-table-column>
       <el-table-column
         label="上传时间"
-        prop="createTime"
+        prop="wed_createTime"
       >
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         label="更新时间"
         prop="updateTime"
        >
-       </el-table-column>`
+       </el-table-column> -->
         <el-table-column
             label="状态"
         >
@@ -62,7 +62,7 @@
 
 <script>
 import AddWedding from './AddWedding'
-// import AddWedingrad from './AddWedingrad'
+
 export default {
   data () {
     return {
@@ -73,18 +73,17 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.state.banner.bannerList
+      return this.$store.state.wedding.weddingList
     },
     total () {
-      return this.$store.state.banner.total
+      return this.$store.state.wedding.total
     }
   },
   created () {
-    this.getBanner()
+    this.getWedding()
   },
   components: {
     AddWedding
-    // AddWedingrad
   },
   methods: {
     showModal () {
@@ -96,14 +95,14 @@ export default {
     changePage (current) {
       this.current = current
       // 通过当前页码的改变 改变当前页的数据
-      this.getBanner()
+      this.getWedding()
     },
     changePageSize (size) {
       this.pageSize = size
-      this.getBanner()
+      this.getWedding()
     },
-    getBanner () {
-      this.$store.dispatch('getBannerList', {
+    getWedding () {
+      this.$store.dispatch('getWeddingList', {
         current: this.current,
         pageSize: this.pageSize
       })

@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { setBanner } from 'public/axiosRequest'
+import { setJewel } from 'public/axiosRequest'
 export default {
   data () {
     const sheckImg = (rule, value, callback) => {
@@ -136,11 +136,11 @@ export default {
           imgId: response.data.id
         }
         // 调用封装的axios方法
-        setBanner(data, () => {
+        setJewel(data, () => {
           this.loading = false
           this.$emit('closeModal')
           // 刷新列表数据
-          this.$store.dispatch('getBannerList')
+          this.$store.dispatch('getJewelList')
         }, () => {
           this.loading = false
         })
