@@ -104,6 +104,20 @@ const getJewel = (options) => {
   })
 }
 
+const DeteleTour = (data, success, fail) => {
+  axiosRequest({
+    url: 'DeteleTour',
+    data: data
+  }).then((res) => {
+    success()
+    // this.loading = false
+    // this.$emit('closeModal')
+  }).catch(() => {
+    // this.loading = false
+    fail()
+  })
+}
+
 export {
   setTour,
   getTour,
@@ -112,5 +126,6 @@ export {
   setWedding,
   getWedding,
   setJewel,
-  getJewel
+  getJewel,
+  DeteleTour
 }
