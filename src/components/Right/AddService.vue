@@ -6,16 +6,16 @@
         :rules="rules"
         ref="formadd"
       >
-        <!-- <el-form-item
-          label="请输入图片标题"
+        <el-form-item
+          label="请添加新闻标题"
           prop="title"
           :inline-message="true"
         >
           <el-input v-model="formdata.title"></el-input>
-        </el-form-item> -->
+        </el-form-item>
 
         <el-form-item
-          label="请上传酒店LOGO"
+          label="请上传新闻图片"
           prop="imageUrl"
         >
           <el-upload
@@ -27,7 +27,6 @@
             :auto-upload="false"
             :on-success="imgUploadSuccess"
             ref="upload"
-            limit="5"
           >
             <img width="100%" height="100%" v-if="formdata.imageUrl" :src="formdata.imageUrl" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -37,7 +36,10 @@
           label="添加详解"
           prop="text"
         >
-        <el-input v-model="formdata.text"></el-input>
+        <textarea
+           v-model="formdata.text"
+        ></textarea>
+        <!-- <el-input v-model="formdata.text"></el-input> -->
         </el-form-item>
         <el-form-item
           label="请选择状态"
@@ -76,14 +78,14 @@
 </template>
 
 <script>
-import { setBanner } from 'public/axiosRequest'
+import { setService } from 'public/axiosRequest'
 export default {
   data () {
     const sheckImg = (rule, value, callback) => {
       if (value) {
         callback()
       } else {
-        callback(new Error('请上传珠宝图片'))
+        callback(new Error('请上穿咨询图片'))
       }
     }
     return {
@@ -97,12 +99,15 @@ export default {
       },
       loading: false,
       rules: {
+        title: [{
+          required: true,
+          message: '请输入标题',
+          trigger: 'blur'
+        }],
         text: [{
           required: true,
           message: '请输入详解',
           trigger: 'blur'
-        }, {
-
         }],
         status: [{
           required: true,
@@ -140,11 +145,11 @@ export default {
           imgId: response.data.id
         }
         // 调用封装的axios方法
-        setBanner(data, () => {
+        setService(data, () => {
           this.loading = false
           this.$emit('closeModal')
           // 刷新列表数据
-          this.$store.dispatch('getBannerList')
+          this.$store.dispatch('getServiceList')
         }, () => {
           this.loading = false
         })

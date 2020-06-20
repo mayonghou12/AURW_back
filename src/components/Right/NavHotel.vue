@@ -5,21 +5,21 @@
         :data="tableData"
       >
       <el-table-column
-        label="酒店"
+        label="酒店图片"
       >
         <template slot-scope="scope">
             <span>{{scope.row.cover}}</span>
             <img width="80" :src="'http://localhost:3000/' + scope.row.img_url" />
         </template>
       </el-table-column>
-      <el-table-column
-        label="上传时间"
-        prop="createTime"
+       <el-table-column
+        label="酒店名称"
+        prop="hot_name"
       >
       </el-table-column>
       <el-table-column
-        label="更新时间"
-        prop="updateTime"
+        label="酒店描述"
+        prop="hot_detail"
        >
        </el-table-column>`
         <el-table-column
@@ -74,14 +74,14 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.state.banner.bannerList
+      return this.$store.state.Hotel.HotelList
     },
     total () {
-      return this.$store.state.banner.total
+      return this.$store.state.Hotel.total
     }
   },
   created () {
-    this.getBanner()
+    this.getHotel()
   },
   components: {
     AddHotel
@@ -96,14 +96,14 @@ export default {
     changePage (current) {
       this.current = current
       // 通过当前页码的改变 改变当前页的数据
-      this.getBanner()
+      this.getHotel()
     },
     changePageSize (size) {
       this.pageSize = size
-      this.getBanner()
+      this.getHotel()
     },
-    getBanner () {
-      this.$store.dispatch('getBannerList', {
+    getHotel () {
+      this.$store.dispatch('getHotelList', {
         current: this.current,
         pageSize: this.pageSize
       })

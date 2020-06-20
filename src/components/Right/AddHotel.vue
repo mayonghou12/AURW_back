@@ -6,16 +6,8 @@
         :rules="rules"
         ref="formadd"
       >
-        <!-- <el-form-item
-          label="请输入图片标题"
-          prop="title"
-          :inline-message="true"
-        >
-          <el-input v-model="formdata.title"></el-input> -->
-        <!-- </el-form-item> -->
-
         <el-form-item
-          label="请上传酒店LOGO2"
+          label="请上传酒店LOGO"
           prop="imageUrl"
         >
           <el-upload
@@ -36,7 +28,9 @@
           label="添加详解"
           prop="text"
         >
-        <el-input v-model="formdata.text"></el-input>
+        <textarea
+           v-model="formdata.text"
+        ></textarea>
         </el-form-item>
         <el-form-item
           label="请选择状态"
@@ -75,7 +69,7 @@
 </template>
 
 <script>
-import { setBanner } from 'public/axiosRequest'
+import { setHotel } from 'public/axiosRequest'
 export default {
   data () {
     const sheckImg = (rule, value, callback) => {
@@ -139,11 +133,11 @@ export default {
           imgId: response.data.id
         }
         // 调用封装的axios方法
-        setBanner(data, () => {
+        setHotel(data, () => {
           this.loading = false
           this.$emit('closeModal')
           // 刷新列表数据
-          this.$store.dispatch('getBannerList')
+          this.$store.dispatch('getHotelList')
         }, () => {
           this.loading = false
         })

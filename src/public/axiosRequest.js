@@ -118,6 +118,56 @@ const DeteleTour = (data, success, fail) => {
   })
 }
 
+const setHotel = (data, success, fail) => {
+  axiosRequest({
+    url: 'setHotel',
+    data: data
+  }).then((res) => {
+    success()
+    // this.loading = false
+    // this.$emit('closeModal')
+  }).catch(() => {
+    // this.loading = false
+    fail()
+  })
+}
+
+const getHotel = (options) => {
+  axiosRequest({
+    url: 'getHotel',
+    data: options.data
+  }).then((res) => {
+    console.log(res)
+    options.success(res)
+  }).catch(() => {
+  })
+}
+
+const setService = (data, success, fail) => {
+  axiosRequest({
+    url: 'setService',
+    data: data
+  }).then((res) => {
+    success()
+    // this.loading = false
+    // this.$emit('closeModal')
+  }).catch(() => {
+    // this.loading = false
+    fail()
+  })
+}
+
+const getService = (options) => {
+  axiosRequest({
+    url: 'getService',
+    data: options.data
+  }).then((res) => {
+    console.log(res)
+    options.success(res)
+  }).catch(() => {
+  })
+}
+
 export {
   setTour,
   getTour,
@@ -127,5 +177,9 @@ export {
   getWedding,
   setJewel,
   getJewel,
-  DeteleTour
+  DeteleTour,
+  setHotel,
+  getHotel,
+  setService,
+  getService
 }

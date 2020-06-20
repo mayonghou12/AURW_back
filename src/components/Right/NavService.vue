@@ -14,15 +14,20 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="上传时间"
-        prop="createTime"
+        label="新闻标题"
+        prop="jou_title"
       >
       </el-table-column>
-      <!-- <el-table-column
-        label="更新时间"
-        prop="updateTime"
+      <el-table-column
+        label="上传时间"
+        prop="jou_uploadTime"
        >
-       </el-table-column>` -->
+       </el-table-column>
+       <el-table-column
+        label="新闻详情"
+        prop="jou_detail"
+       >
+       </el-table-column>`
         <el-table-column
             label="状态"
         >
@@ -75,14 +80,14 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.state.banner.bannerList
+      return this.$store.state.Service.ServiceList
     },
     total () {
-      return this.$store.state.banner.total
+      return this.$store.state.Service.total
     }
   },
   created () {
-    this.getBanner()
+    this.getService()
   },
   components: {
     AddService
@@ -97,14 +102,14 @@ export default {
     changePage (current) {
       this.current = current
       // 通过当前页码的改变 改变当前页的数据
-      this.getBanner()
+      this.getService()
     },
     changePageSize (size) {
       this.pageSize = size
-      this.getBanner()
+      this.getService()
     },
-    getBanner () {
-      this.$store.dispatch('getBannerList', {
+    getService () {
+      this.$store.dispatch('getServiceList', {
         current: this.current,
         pageSize: this.pageSize
       })
