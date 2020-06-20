@@ -34,21 +34,26 @@
         <el-table-column
             label="操作"
         >
-        <template>
+        <!-- <template>
           <el-link type="primary">编辑</el-link>
-          <el-link style="margin-left:5px" type="danger">删除</el-link>
-          <!-- <a>{{scope.row.status == 1 ? '下线' : '上线'}}</a> -->
+           <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+          <el-link @click="detele" style="margin-left:5px" type="danger">删除</el-link>
+         <a>{{scope.row.status == 1 ? '下线' : '上线'}}</a>
+        </template> -->
+        <template slot-scope="scope">
+          <el-button type="text" size="small">编辑</el-button>
+          <el-button @click="delectClick(scope.row)" type="text" size="small">删除</el-button>
         </template>
         </el-table-column>
       </el-table>
       <el-pagination
-      background
-      layout="prev,pager,next,sizes"
-      :total="total"
-      :page-size="pageSize"
-      :page-sizes="[2,5,10]"
-      @current-change="changePage"
-      @size-change="changePageSize"
+        background
+        layout="prev,pager,next,sizes"
+        :total="total"
+        :page-size="pageSize"
+        :page-sizes="[2,5,10]"
+        @current-change="changePage"
+        @size-change="changePageSize"
       >
       </el-pagination>
       <el-dialog
@@ -65,6 +70,7 @@
 
 <script>
 import AddTravel from './AddTravel'
+import { DeteleTour } from 'public/axiosRequest'
 export default {
   data () {
     return {
@@ -108,6 +114,16 @@ export default {
         current: this.current,
         pageSize: this.pageSize
       })
+    },
+    delectClick (row) {
+      console.log(row)
+      console.log(row.tour_id)
+      DeteleTour((row), () => {
+        this.$emit('closeModal')
+        // 刷新列表数据
+        this.$store.dispatch('getJewelList')
+      })
+      this.getTour()
     }
   }
 }

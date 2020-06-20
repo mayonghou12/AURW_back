@@ -27,7 +27,6 @@
             :auto-upload="false"
             :on-success="imgUploadSuccess"
             ref="upload"
-            limit="5"
           >
             <img width="100%" height="100%" v-if="formdata.imageUrl" :src="formdata.imageUrl" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -150,7 +149,6 @@ export default {
       this.$refs.formadd.validate((valid) => {
         // console.log(valid)
         if (valid) {
-          this.loading = false
           this.$refs.upload.submit()
         }
       })

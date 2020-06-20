@@ -35,7 +35,7 @@
         >
         <template>
           <el-link type="primary">编辑</el-link>
-          <el-link style="margin-left:5px" type="danger">删除</el-link>
+          <el-link @click="detele(id)" style="margin-left:5px" type="danger">删除</el-link>
           <!-- <a>{{scope.row.status == 1 ? '下线' : '上线'}}</a> -->
         </template>
         </el-table-column>
@@ -106,6 +106,11 @@ export default {
       this.$store.dispatch('getBannerList', {
         current: this.current,
         pageSize: this.pageSize
+      })
+    },
+    detele () {
+      this.$refs.formadd.validate(() => {
+
       })
     }
   }
