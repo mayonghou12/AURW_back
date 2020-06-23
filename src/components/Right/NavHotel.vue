@@ -26,16 +26,16 @@
             label="状态"
         >
         <template slot-scope="scope">
-            <el-link type="primary">{{scope.row.status == 0 ? '下线' : '上线'}}</el-link>
+            <el-button @click="filtersClick(scope.row)" type="text" >{{scope.row.status == 0 ? '下线' : '上线'}}</el-button>
             <!-- <a>{{scope.row.status == 1 ? '下线' : '上线'}}</a> -->
         </template>
         </el-table-column>
         <el-table-column
             label="操作"
         >
-        <template>
-          <el-link type="primary">编辑</el-link>
-          <el-link @click="detele(id)" style="margin-left:5px" type="danger">删除</el-link>
+        <template slot-scope="scope">
+         <el-button type="text" size="small">编辑</el-button>
+         <el-button @click="delectClick(scope.row)" type="text" size="small">删除</el-button>
           <!-- <a>{{scope.row.status == 1 ? '下线' : '上线'}}</a> -->
         </template>
         </el-table-column>
@@ -64,6 +64,8 @@
 
 <script>
 import AddHotel from './AddHotel'
+import { FiltersTowTour, DeteleTowTour } from 'public/axiosRequest'
+
 export default {
   data () {
     return {
@@ -108,10 +110,21 @@ export default {
         pageSize: this.pageSize
       })
     },
-    detele () {
-      this.$refs.formadd.validate(() => {
-
+    filtersClick (row) {
+      FiltersTowTour((row), () => {
+        this.$emit('closeModal')
+        // 刷新列表数据
+        this.$store.dispatch('getHotelList')
       })
+      this.getHotel()
+    },
+    delectClick (row) {
+      DeteleTowTour((row), () => {
+        this.$emit('closeModal')
+        // 刷新列表数据
+        this.$store.dispatch('getHotelList')
+      })
+      this.getHotel()
     }
   }
 }

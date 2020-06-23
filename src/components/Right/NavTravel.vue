@@ -27,19 +27,13 @@
             label="状态"
         >
         <template slot-scope="scope">
-            <el-link type="primary">{{scope.row.status == 0 ? '下线' : '上线'}}</el-link>
+            <el-button @click="filtersClick(scope.row)" type="text" >{{scope.row.status == 0 ? '下线' : '上线'}}</el-button>
             <!-- <a>{{scope.row.status == 1 ? '下线' : '上线'}}</a> -->
         </template>
         </el-table-column>
         <el-table-column
             label="操作"
         >
-        <!-- <template>
-          <el-link type="primary">编辑</el-link>
-           <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-          <el-link @click="detele" style="margin-left:5px" type="danger">删除</el-link>
-         <a>{{scope.row.status == 1 ? '下线' : '上线'}}</a>
-        </template> -->
         <template slot-scope="scope">
           <el-button type="text" size="small">编辑</el-button>
           <el-button @click="delectClick(scope.row)" type="text" size="small">删除</el-button>
@@ -70,7 +64,8 @@
 
 <script>
 import AddTravel from './AddTravel'
-import { DeteleTour } from 'public/axiosRequest'
+import { DeteleTour, FiltersTour } from 'public/axiosRequest'
+
 export default {
   data () {
     return {
@@ -116,14 +111,19 @@ export default {
       })
     },
     delectClick (row) {
-      console.log(row)
-      console.log(row.tour_id)
       DeteleTour((row), () => {
         this.$emit('closeModal')
         // 刷新列表数据
-        this.$store.dispatch('getJewelList')
+        this.$store.dispatch('getTourList')
       })
       this.getTour()
+    },
+    filtersClick (row) {
+      FiltersTour((row), () => {
+        this.$emit('closeModal')
+        // 刷新列表数据
+        this.$store.dispatch('getTourList')
+      })
     }
   }
 }

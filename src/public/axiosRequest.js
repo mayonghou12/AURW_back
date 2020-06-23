@@ -98,23 +98,8 @@ const getJewel = (options) => {
     url: 'getJewel',
     data: options.data
   }).then((res) => {
-    console.log(res)
     options.success(res)
   }).catch(() => {
-  })
-}
-
-const DeteleTour = (data, success, fail) => {
-  axiosRequest({
-    url: 'DeteleTour',
-    data: data
-  }).then((res) => {
-    success()
-    // this.loading = false
-    // this.$emit('closeModal')
-  }).catch(() => {
-    // this.loading = false
-    fail()
   })
 }
 
@@ -168,6 +153,50 @@ const getService = (options) => {
   })
 }
 
+const DeteleTour = (data, success, fail) => {
+  axiosRequest({
+    url: 'DeteleTour',
+    data: data
+  }).then((res) => {
+    success()
+  }).catch(() => {
+    fail()
+  })
+}
+
+const FiltersTour = (data, success, fail) => {
+  axiosRequest({
+    url: 'FiltersTour',
+    data: data
+  }).then((res) => {
+    success()
+  }).catch(() => {
+    fail()
+  })
+}
+
+// 酒店删除和上下线
+const DeteleTowTour = (data, success, fail) => {
+  axiosRequest({
+    url: 'DeteleTowTour',
+    data: data
+  }).then((res) => {
+    success()
+  }).catch(() => {
+    fail()
+  })
+}
+
+const FiltersTowTour = (data, success, fail) => {
+  axiosRequest({
+    url: 'FiltersTowTour',
+    data: data
+  }).then((res) => {
+    success()
+  }).catch(() => {
+    fail()
+  })
+}
 export {
   setTour,
   getTour,
@@ -177,9 +206,12 @@ export {
   getWedding,
   setJewel,
   getJewel,
-  DeteleTour,
   setHotel,
   getHotel,
   setService,
-  getService
+  getService,
+  FiltersTour,
+  FiltersTowTour,
+  DeteleTour,
+  DeteleTowTour
 }

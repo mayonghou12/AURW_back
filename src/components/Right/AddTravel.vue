@@ -82,7 +82,6 @@ export default {
     }
     return {
       formdata: {
-        title: '',
         status: '',
         createTime: '',
         imageUrl: '',
