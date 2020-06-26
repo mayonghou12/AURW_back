@@ -22,14 +22,15 @@
             class="avatar-uploader"
             action="/api/upload"
             list-type="picture-card"
-            :show-file-list="false"
             :on-change="changeUpload"
             :auto-upload="false"
             :on-success="imgUploadSuccess"
+            :on-remove="removeUpload"
             ref="upload"
+            multiple
           >
-            <img width="100%" height="100%" v-if="formdata.imageUrl" :src="formdata.imageUrl" class="avatar">
-            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            <!-- <img width="100%" height="100%" v-if="formdata.imageUrl" :src="formdata.imageUrl" class="avatar"> -->
+            <i class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
 
@@ -74,7 +75,7 @@ import { setTour } from 'public/axiosRequest'
 export default {
   data () {
     const sheckImg = (rule, value, callback) => {
-      if (value) {
+      if (this.imgList.length > 0) {
         callback()
       } else {
         callback(new Error('请上传图片'))
@@ -87,6 +88,9 @@ export default {
         imageUrl: '',
         file: {}
       },
+      imgList: [],
+      imgUrl: [],
+      imgId: [],
       loading: false,
       rules: {
         title: [{
@@ -119,35 +123,46 @@ export default {
   },
   methods: {
     changeUpload (file, fileList) {
-      console.log(file, fileList)
-      var url = window.URL.createObjectURL(file.raw)
-      this.formdata.imageUrl = url
-      this.formdata.file = file
+      this.imgList = fileList
+      // console.log(fileList)
+      // console.log(file, fileList)
+      // var url = window.URL.createObjectURL(file.raw)
+      // this.formdata.imageUrl = url
+      // this.formdata.file = file
     },
+    removeUpload (file, fileList) {
+      this.imgList = fileList
+    },
+    // 图片上传成功的回调函数
     imgUploadSuccess (response, file, filelist) {
       if (response.status === 200) {
-        // 图片上传成功 获取到图片的id
-        // 上传banner的信息
-        var data = {
-          title: this.formdata.title,
-          status: this.formdata.status,
-          createTime: this.formdata.createTime,
-          imgId: response.data.id
+        this.imgUrl.push(response.data.img || '')
+        this.imgId.push(response.data.id || '')
+        // 表示图片上传完成  上传旅拍的其他信息以及图片信息
+        if (this.imgUrl.length >= this.imgList.length) {
+          // 图片上传成功 获取到图片的id
+          // 上传旅拍的信息
+          var data = {
+            title: this.formdata.title,
+            status: this.formdata.status,
+            createTime: this.formdata.createTime,
+            imgId: this.imgId.join(','),
+            imgUrl: this.imgUrl.join(',')
+          }
+          // 调用封装的axios方法
+          setTour(data, () => {
+            this.loading = false
+            this.$emit('closeModal')
+            // 刷新列表数据
+            this.$store.dispatch('getTourList')
+          }, () => {
+            this.loading = false
+          })
         }
-        // 调用封装的axios方法
-        setTour(data, () => {
-          this.loading = false
-          this.$emit('closeModal')
-          // 刷新列表数据
-          this.$store.dispatch('getTourList')
-        }, () => {
-          this.loading = false
-        })
       }
     },
     submitForm () {
       this.$refs.formadd.validate((valid) => {
-        // console.log(valid)
         if (valid) {
           this.loading = false
           this.$refs.upload.submit()

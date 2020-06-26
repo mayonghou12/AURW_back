@@ -21,7 +21,11 @@ const actions = {
       data,
       success: function (res) {
         if (res.status === 200) {
-          commit('changeDressList', res.data.list)
+          var DressList = res.data.list
+            DressList.forEach((item) => {
+            item.img_url_new = item.img_url.split(',')
+          })
+          commit('changeDressList', DressList)
           commit('changeTotal', res.data.total)
         }
       }

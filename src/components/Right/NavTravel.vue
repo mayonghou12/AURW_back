@@ -9,8 +9,8 @@
         label="旅拍图"
       >
         <template slot-scope="scope">
-            <!-- <span>{{scope.row.cover}}</span> -->
-            <img width="80" :src="'http://localhost:3000/' + scope.row.img_url" />
+            <!-- <span>{{scope.row.img_url_new[0]}}</span> -->
+            <img width="80" :src="api + scope.row.img_url_new[1]" />
         </template>
       </el-table-column>
       <el-table-column
@@ -65,13 +65,15 @@
 <script>
 import AddTravel from './AddTravel'
 import { DeteleTour, FiltersTour } from 'public/axiosRequest'
+import { api } from 'public/api'
 
 export default {
   data () {
     return {
       isShowDialog: false,
       pageSize: 5,
-      current: 1
+      current: 1,
+      api
     }
   },
   computed: {

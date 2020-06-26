@@ -10,7 +10,7 @@
       >
         <template slot-scope="scope">
             <!-- <span>{{scope.row.cover}}</span> -->
-            <img width="80" :src="'http://localhost:3000/' + scope.row.img_url" />
+            <img width="80" :src="api + scope.row.img_url" />
         </template>
       </el-table-column>
       <el-table-column
@@ -60,12 +60,15 @@
 
 <script>
 import AddJewellery from './AddJewellery'
+import { api } from 'public/api'
+
 export default {
   data () {
     return {
       isShowDialog: false,
       pageSize: 5,
-      current: 1
+      current: 1,
+      api
     }
   },
   computed: {

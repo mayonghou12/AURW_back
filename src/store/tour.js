@@ -21,7 +21,11 @@ const actions = {
       data,
       success: function (res) {
         if (res.status === 200) {
-          commit('changeTourList', res.data.list)
+          var tourList = res.data.list
+          tourList.forEach((item) => {
+            item.img_url_new = item.img_url.split(',')
+          })
+          commit('changeTourList', tourList)
           commit('changeTotal', res.data.total)
         }
       }
@@ -30,6 +34,14 @@ const actions = {
 }
 
 const getters = {
+  // newtourList ({ state }) {
+  //   var list = []
+  //   state.tourList.forEach((item) => {
+  //     item.img_url_new = item.img_url.split(',')
+  //     list.push(item)
+  //   })
+  //   return list
+  // }
 }
 
 export default {
