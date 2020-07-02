@@ -141,6 +141,7 @@ export default {
         var data = {
           title: this.formdata.title,
           status: this.formdata.status,
+          text: this.formdata.text,
           createTime: this.formdata.createTime,
           imgId: response.data.id
         }

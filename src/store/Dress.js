@@ -22,7 +22,7 @@ const actions = {
       success: function (res) {
         if (res.status === 200) {
           var DressList = res.data.list
-            DressList.forEach((item) => {
+          DressList.forEach((item) => {
             item.img_url_new = item.img_url.split(',')
           })
           commit('changeDressList', DressList)

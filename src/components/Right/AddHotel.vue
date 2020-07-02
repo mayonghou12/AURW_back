@@ -6,6 +6,12 @@
         :rules="rules"
         ref="formadd"
       >
+       <el-form-item
+          label="添加酒店名称"
+          prop="name"
+        >
+        <el-input v-model="formdata.name"></el-input>
+        </el-form-item>
         <el-form-item
           label="请上传酒店LOGO"
           prop="imageUrl"
@@ -81,7 +87,7 @@ export default {
     }
     return {
       formdata: {
-        title: '',
+        name: '',
         status: '',
         text: '',
         createTime: '',
@@ -90,12 +96,15 @@ export default {
       },
       loading: false,
       rules: {
+        name: [{
+          required: true,
+          message: '请输入酒店名称',
+          trigger: 'blur'
+        }],
         text: [{
           required: true,
           message: '请输入详解',
           trigger: 'blur'
-        }, {
-
         }],
         status: [{
           required: true,
@@ -127,8 +136,9 @@ export default {
         // 图片上传成功 获取到图片的id
         // 上传banner的信息
         var data = {
-          title: this.formdata.title,
+          name: this.formdata.name,
           status: this.formdata.status,
+          text: this.formdata.text,
           createTime: this.formdata.createTime,
           imgId: response.data.id
         }
